@@ -1,0 +1,2 @@
+#! /bin/bash
+ls -pAt --ignore=".*" | grep -v "/$" | tr '\n' '.' | sed 's/,$//'
