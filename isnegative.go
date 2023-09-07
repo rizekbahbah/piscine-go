@@ -10,3 +10,4 @@ func IsNegative(nb int) {
 	}
 	z01.PrintRune('\n')
 }
+d
