@@ -8,3 +8,4 @@ func isprime(x int) bool {
 	}
 	return true
 }
+// hdirfgkj
