@@ -3,7 +3,7 @@ package piscine
 func IsUpper(str string) bool {
 	_arr := []rune(str)
 	ln := 0
-	for i := range my_arr {
+	for i := range _arr {
 		ln = i
 	}
 
