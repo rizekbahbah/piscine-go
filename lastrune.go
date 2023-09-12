@@ -5,6 +5,6 @@ func LastRune(s string) rune {
 	for index := range s {
 		_c = index
 	}
-	_arr := []rune(s)
-	return _arr[_c]
+	x := []rune(s)
+	return x[_c]
 }
