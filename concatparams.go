@@ -1,17 +1,17 @@
 package piscine
 
 func ConcatParams(args []string) string {
-	mySts := ""
+	Str := ""
 	ln := 0
 	for i := range args {
 		ln = i
 	}
 	for i := 0; i <= ln; i++ {
 		if i != ln {
-			myStr = myStr + args[i] + "\n"
+			Str = Str + args[i] + "\n"
 		} else {
-			myStr = myStr + args[i]
+			Str = Str + args[i]
 		}
 	}
-	return myStr
+	return Str
 }
