@@ -7,11 +7,12 @@ func MakeRange(min, max int) []int {
 	if min >= max {
 		return nil 
 	}
+
 	bbb = make([]int, ln)
 
-	for i := 0; i < ln: i++{
+	for i := 0; i < ln; i++{
 		bbb[i] = min 
 		min++
 	}
 	return bbb 
-} 
+}    
