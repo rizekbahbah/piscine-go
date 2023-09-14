@@ -10,12 +10,12 @@ func main() {
 	arguments := make([]string, len(os.Args))
 	copy(arguments, os.Args)
 
-	var argunes []rune
+	var argrunes []rune
 
 	for i := len(arguments) - 1; i > 0; i-- {
-		argunes = []rune(arguments[i])
+		argrunes = []rune(arguments[i])
 		if i < len(arguments) {
-			for j := 0; j < len(argunes); j++ {
+			for j := 0; j < len(argrunes); j++ {
 				z01.PrintRune(argrunes[j])
 			}
 			z01.PrintRune('\n')
