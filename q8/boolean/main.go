@@ -1,39 +1,52 @@
 package main
 
-import (
-	"os"
+import "github.com/01-edu/z01"
 
-	"github.com/01-edu/z01"
-)
-
-func printStr(str string) {
-	arrayStr := []rune(str)
-
-	for i := 0; i < len(arrayStr); i++ {
-		z01.PrintRune(arrayStr[i])
-	}
-	z01.PrintRune('\n')
+type point struct {
+	x int
+	y int
 }
 
-func even(nbr int) bool {
-	return nbr%2 == 0
-}
-
-func isEven(nbr int) bool {
-	if even(nbr) {
-		return true
-	} else {
-		return false
-	}
+func setPoint(ptr *point) {
+	ptr.x = 42
+	ptr.y = 21
 }
 
 func main() {
-	lengthOfArg := len(os.Args[1:])
-	if isEven(lengthOfArg) {
-		EvenMsg := "I have an even number of arguments"
-		printStr(EvenMsg)
-	} else {
-		OddMsg := "I have an odd number of arguments"
-		printStr(OddMsg)
+	xStr := "x = "
+	yStr := "y = "
+	points := &point{}
+
+	setPoint(points)
+
+	xmassiv := []rune{}
+	ymassiv := []rune{}
+
+	xVal := points.x
+	yVal := points.y
+
+	for xVal != 0 {
+		xmassiv = append(xmassiv, rune(xVal%10))
+		xVal /= 10
 	}
+	for _, val := range xStr {
+		z01.PrintRune(rune(val))
+	}
+	for i := len(xmassiv) - 1; i >= 0; i-- {
+		z01.PrintRune(xmassiv[i] + 48)
+	}
+	z01.PrintRune(',')
+	z01.PrintRune(' ')
+
+	for yVal != 0 {
+		ymassiv = append(ymassiv, rune(yVal%10))
+		yVal /= 10
+	}
+	for _, val := range yStr {
+		z01.PrintRune(rune(val))
+	}
+	for i := len(ymassiv) - 1; i >= 0; i-- {
+		z01.PrintRune(ymassiv[i] + 48)
+	}
+	z01.PrintRune('\n')
 }
