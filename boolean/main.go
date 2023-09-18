@@ -1,50 +1,39 @@
-package piscine
+package main
 
 import (
 	"os"
+
 	"github.com/01-edu/z01"
 )
-
-func main() {
-	lengthOfArg := 0
-
-	sentence := os.Args
-	for index := range sentence {
-			lengthOfArg = index 
-	}
-
-
-func isEven(lengthOfArg) == true {
-	printStr("I have an even number of arguments")
-} else {
-	printStr("I have an odd number of arguments")
-}
-}
 
 func printStr(str string) {
 	arrayStr := []rune(str)
 
-	lengthOfArg := 0
-
-	for ind := range arrayStr {
-		lengthOfArg = ind
-	}
-
-	for i := 0; i < lengthOfArg; i++ {
-
-		z01.PrintRune(rune(arrayStr[i]))
+	for i := 0; i < len(arrayStr); i++ {
+		z01.PrintRune(arrayStr[i])
 	}
 	z01.PrintRune('\n')
 }
 
-func is Even(nbr int) bool {
-	if nbr%2 == 0 {
+func even(nbr int) bool {
+	return nbr%2 == 0
+}
+
+func isEven(nbr int) bool {
+	if even(nbr) {
 		return true
 	} else {
 		return false
 	}
 }
 
-
-
-
+func main() {
+	lengthOfArg := len(os.Args[1:])
+	if isEven(lengthOfArg) {
+		EvenMsg := "I have an even number of arguments"
+		printStr(EvenMsg)
+	} else {
+		OddMsg := "I have an odd number of arguments"
+		printStr(OddMsg)
+	}
+}
