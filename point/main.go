@@ -36,7 +36,7 @@ func main() {
 
 	setPoint(&points)
 
-	PointStr("  x =  ")
+	PrintStr("x =  ")
 	PrintInt(points.x)
 	PrintStr(" , y = ")
 	PrintInt(points.y)
