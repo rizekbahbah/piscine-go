@@ -30,6 +30,7 @@ func PrintInt(a int) {
 		r++
 	}
 	z01.PrintRune(r)
+}
 
 func main() {
 		var points point 
@@ -42,4 +43,5 @@ func main() {
 		PrintInt(points.y)
 		z01.PrintRune('\n')
 	}
-}
+
+
