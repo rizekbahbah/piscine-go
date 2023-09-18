@@ -2,15 +2,13 @@ package main
 
 import "github.com/01-edu/z01"
 
-//import "fmt"
-
+// import "fmt"
 type point struct {
 	x int
 	y int
 }
 
 func setPoint(ptr *point) {
-
 	ptr.x = 42
 	ptr.y = 21
 }
@@ -37,7 +35,6 @@ func main() {
 }
 
 func check(r int) {
-
 	c := '0'
 	if r == 0 {
 		z01.PrintRune(c)
@@ -54,7 +51,6 @@ func check(r int) {
 	}
 	z01.PrintRune(c)
 	return
-
 }
 
 func IntoRune(n int) {
