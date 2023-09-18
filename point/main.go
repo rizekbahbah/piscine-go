@@ -1,7 +1,6 @@
 package main
 
-import  "github.com/01-edu/z01"
-
+import "github.com/01-edu/z01"
 
 type point struct {
 	x int
@@ -24,7 +23,7 @@ func setPoint(ptr *point) {
 func PrintInt(a int) {
 	r := '0'
 	if a/10 > 0 {
-		PrintInt(a / 10 ) 
+		PrintInt(a / 10)
 	}
 	for i := 0; i < a%10; i++ {
 		r++
@@ -33,15 +32,13 @@ func PrintInt(a int) {
 }
 
 func main() {
-		var points point 
+	var points point
 
-		setPoint(%points)
+	setPoint(&points)
 
-		PointStr("x = ")
-		PrintInt(points.x)
-		PrintStr(", y = ")
-		PrintInt(points.y)
-		z01.PrintRune('\n')
-	}
-
-
+	PointStr("  x =  ")
+	PrintInt(points.x)
+	PrintStr(" , y = ")
+	PrintInt(points.y)
+	z01.PrintRune('\n')
+}
