@@ -36,9 +36,9 @@ func main() {
 
 	setPoint(&points)
 
-	PrintStr("x =  ")
+	PrintStr("x = ")
 	PrintInt(points.x)
-	PrintStr(" , y = ")
+	PrintStr(", y = ")
 	PrintInt(points.y)
 	z01.PrintRune('\n')
 }
