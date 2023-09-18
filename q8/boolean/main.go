@@ -1,52 +1,39 @@
 package main
 
 import (
+	"os"
+
 	"github.com/01-edu/z01"
 )
 
-type cord struct {
-	x int
-	y int
-}
+func printStr(str string) {
+	arrayStr := []rune(str)
 
-func setPoint(ptr *cord) {
-	ptr.x = 42
-	ptr.y = 21
-}
-
-func printS(s string) {
-	for _, sym := range s {
-		z01.PrintRune(sym)
+	for i := 0; i < len(arrayStr); i++ {
+		z01.PrintRune(arrayStr[i])
 	}
+	z01.PrintRune('\n')
 }
 
-func intToRune(num int) {
-	if num < 10 {
-		for i, j := 0, '0'; i <= num%10; i, j = i+1, j+1 {
-			if i == num%10 {
-				z01.PrintRune(j)
-			}
-		}
+func even(nbr int) bool {
+	return nbr%2 == 0
+}
+
+func isEven(nbr int) bool {
+	if even(nbr) {
+		return true
 	} else {
-		nextnum := num / 10
-		mod := num % 10
-		intToRune(nextnum)
-		intToRune(mod)
+		return false
 	}
 }
 
 func main() {
-	pt := cord{}
-	points := pt
-
-	setPoint(&points)
-	printS("x = ")
-	//	printI(points.x)
-	intToRune(points.x)
-
-	printS(", y = ")
-	//	printI(points.y)
-	intToRune(points.y)
-
-	z01.PrintRune('\n')
+	lengthOfArg := len(os.Args[1:])
+	if isEven(lengthOfArg) {
+		EvenMsg := "I have an even number of arguments"
+		printStr(EvenMsg)
+	} else {
+		OddMsg := "I have an odd number of arguments"
+		printStr(OddMsg)
+	}
 }
