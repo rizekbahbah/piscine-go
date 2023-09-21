@@ -1,4 +1,4 @@
-package main
+package piscine
 
 func rot14(b rune) rune {
 	if b >= 'A' && b < 'M' || b >= 'a' && b < 'm' {
@@ -10,9 +10,9 @@ func rot14(b rune) rune {
 	return b
 }
 
-func Rot14(str string) string {
+func Rot14(s string) string {
 	result := ""
-	for _, res:= range str{
+	for _, res:= range s{
 		result += string(rot14(res))
 	}
 	return result
