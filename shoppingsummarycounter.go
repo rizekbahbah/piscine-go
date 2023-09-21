@@ -1,8 +1,7 @@
 package piscine
 
 func ShoppingSummaryCounter(str string) map[string]int {
-	items := string.Split(str, "\n")
-
+	// Split the string into a slice of items.
 	// Create a map to store the item counts.
 	summary := make(map[string]int)
 
