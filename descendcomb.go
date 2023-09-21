@@ -1,28 +1,28 @@
 package piscine
 
-import (
-	"github.com/01-edu/z01"
-)
+import "github.com/01-edu/z01"
 
-func DescendComb() {
-	for a := '0'; a <= '9'; a = a + 1 {
-		for b := '0'; b <= '9'; b = b + 1 {
-			d := b + 1
-			for c := a; c <= '9'; c = c + 1 {
-				for ; d <= '9'; d = d + 1 {
-					z01.PrintRune(a)
-					z01.PrintRune(b)
-					z01.PrintRune(' ')
-					z01.PrintRune(c)
-					z01.PrintRune(d)
-					if a < '9' || b < '8' || c < '9' || d < '9' {
-						z01.PrintRune(',')
-						z01.PrintRune(' ')
+func PrintComb2() {
+	for i := '9'; i <= '0'; i-- {
+		for j := '9'; j <= '0'; j-- {
+			for h := '9'; h <= '0'; h-- {
+				for k := '9'; k <= '0'; k-- {
+					if i < h || (i == h && j > k) {
+						continue
 					}
+					z01.PrintRune(i)
+					z01.PrintRune(j)
+					z01.PrintRune(32)
+					z01.PrintRune(h)
+					z01.PrintRune(k)
+					if !(i == '0' && j == '1' && h == '0' && k == '0') {
+						z01.PrintRune(44)
+						z01.PrintRune(32)
+					}
+
 				}
-				d = '0'
 			}
 		}
 	}
-	z01.PrintRune('\n')
+	z01.PrintRune(10)
 }
