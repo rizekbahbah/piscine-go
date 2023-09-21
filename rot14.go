@@ -12,7 +12,7 @@ func rot14(b rune) rune {
 
 func Rot14(s string) string {
 	result := ""
-	for _, res:= range s{
+	for _, res := range s {
 		result += string(rot14(res))
 	}
 	return result
