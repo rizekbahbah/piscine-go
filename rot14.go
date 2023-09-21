@@ -1,4 +1,4 @@
-package piscine
+package main
 
 func rot14(b rune) rune {
 	if b >= 'A' && b < 'M' || b >= 'a' && b < 'm' {
