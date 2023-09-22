@@ -1,13 +1,9 @@
 package piscine
 
-func DescendAppendRange(max, min int) []int {
-	var A []int
-	if max > min {
-		for i := max; i > min; i-- {
-			A = append(A, i)
-		}
-	} else {
-		return []int{}
+func ReverseMenuIndex(menu []string) []string {
+	mas := make([]string, len(menu))
+	for i := 0; i < len(mas); i++ {
+		mas[i] = menu[len(menu)-1-i]
 	}
-	return A
+	return mas
 }
