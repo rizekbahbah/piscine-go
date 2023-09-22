@@ -1,134 +1,217 @@
 package main
 
 import (
-	"fmt"
-	//	"github.com/01-edu/z01"
+	// "fmt"
 	"os"
 )
 
+func PrintConsole(str string) {
+	os.Stdout.WriteString(str)
+	os.Stdout.WriteString("\n")
+	os.Stdout.Close()
+}
+
+func NbrToStrRec(n, dot int64) string {
+	if 10 > n && n > -1*10 {
+		return string('0' + n*dot)
+	}
+	return NbrToStrRec(n/10, dot) + string('0'+(n%10)*dot)
+}
+
+func NbrToStr(n int64) string {
+	dot := int64(1)
+	res := ""
+	if n == 0 {
+		return "0"
+	}
+	if n < 0 {
+		dot *= -1
+		res += "-"
+	}
+	return res + NbrToStrRec(n, dot)
+}
+
+func AtoiOverflow(a, b, c int64) bool {
+	if a < 0 && c < 0 {
+		return a*b+c < 0
+	} else if a > 0 && c > 0 {
+		return a*b+c > 0
+	}
+	return true
+}
+
+func MultiplyOverflow(a, b, c int64) bool {
+	prod := a*b + c
+	return (prod/b)-c == a
+}
+
+func PlusOverflow(a, b int64) bool {
+	if a < 0 && b < 0 {
+		return a+b < 0
+	} else if a > 0 && b > 0 {
+		return a+b > 0
+	}
+	return true
+}
+
+func MinusOverflow(a, b int64) bool {
+	if a < 0 && b < 0 {
+		if b <= a {
+			return a-b >= 0
+		}
+		return a-b < 0
+	} else if a > 0 && b > 0 {
+		if a <= b {
+			return a-b <= 0
+		}
+		return a-b > 0
+	}
+	return true
+}
+
+func Atoi(nbr string) (int64, bool) {
+	var res int64 = 0
+	var sign int64 = 1
+	if nbr[0] == '-' {
+		nbr = nbr[1:]
+		sign *= -1
+	} else if nbr[0] == '+' {
+		nbr = nbr[1:]
+	}
+	for _, digit := range nbr {
+		tmp := int64(digit-'0') * sign
+		if !AtoiOverflow(res, int64(10), tmp) {
+			return 0, false
+		}
+		res = res*10 + tmp
+	}
+	return res, true
+}
+
+func Plus(a, b string) {
+	aa, aBool := Atoi(a)
+	if !aBool {
+		PrintConsole("0")
+		return
+	}
+	bb, bBool := Atoi(b)
+	if !bBool {
+		PrintConsole("0")
+		return
+	}
+	if !PlusOverflow(aa, bb) {
+		PrintConsole("0")
+		return
+	}
+	PrintConsole(NbrToStr(aa + bb))
+}
+
+func Deduct(a, b string) {
+	aa, aBool := Atoi(a)
+	if !aBool {
+		PrintConsole("0")
+		return
+	}
+	bb, bBool := Atoi(b)
+	if !bBool {
+		PrintConsole("0")
+		return
+	}
+	if !MinusOverflow(aa, bb) {
+		PrintConsole("-0")
+		return
+	}
+	PrintConsole(NbrToStr(aa - bb))
+}
+
+func Devide(a, b string) {
+	bb, bBool := Atoi(b)
+	if !bBool {
+		PrintConsole("0")
+		return
+	}
+	if bb == 0 {
+		PrintConsole("No division by 0")
+		return
+	}
+	aa, aBool := Atoi(a)
+	if !aBool {
+		PrintConsole("0")
+		return
+	}
+	PrintConsole(NbrToStr(aa / bb))
+}
+
+func Multiply(a, b string) {
+	aa, aBool := Atoi(a)
+	if !aBool {
+		PrintConsole("0")
+		return
+	}
+	bb, bBool := Atoi(b)
+	if !bBool {
+		PrintConsole("0")
+		return
+	}
+	if !MultiplyOverflow(aa, bb, 0) {
+		PrintConsole("0")
+		return
+	}
+	PrintConsole(NbrToStr(aa * bb))
+}
+
+func Mod(a, b string) {
+	bb, bBool := Atoi(b)
+	if !bBool {
+		PrintConsole("0")
+		return
+	}
+	if bb == 0 {
+		PrintConsole("No modulo by 0")
+		return
+	}
+	aa, aBool := Atoi(a)
+	if !aBool {
+		PrintConsole("0")
+		return
+	}
+	PrintConsole(NbrToStr(aa % bb))
+}
+
+func IsNumeric(str string) bool {
+	if str == "" {
+		return false
+	}
+	if str[0] == '-' || str[0] == '+' {
+		str = str[1:]
+	}
+	for _, s := range str {
+		if s < 48 || s > 57 {
+			return false
+		}
+	}
+	return true
+}
+
 func main() {
-	arguments := os.Args[1:]
-
-	length := 0
-	for i := range arguments {
-		length = i + 1
+	args := os.Args[1:]
+	argsCount := 0
+	for range args {
+		argsCount++
 	}
-	if length != 3 {
+	if argsCount != 3 {
 		return
 	}
-
-	sign := 0
-	if arguments[1] == "+" {
-		sign = 0
-	} else if arguments[1] == "-" {
-		sign = 1
-	} else if arguments[1] == "*" {
-		sign = 2
-	} else if arguments[1] == "/" {
-		sign = 3
-	} else if arguments[1] == "%" {
-		sign = 4
-	} else {
-		fmt.Println(0)
-		return
+	if !(IsNumeric(args[0]) && IsNumeric(args[2])) {
+		PrintConsole("0")
 	}
-
-	for i, s := range arguments[0] {
-		if (s >= '0' && s <= '9') || (i == 0 && s == '-') {
-			continue
-		} else {
-			fmt.Print("0\n")
+	funcsArr := []func(string, string){Plus, Deduct, Devide, Multiply, Mod}
+	operators := []string{"+", "-", "/", "*", "%"}
+	for i, val := range operators {
+		if val == args[1] {
+			funcsArr[i](args[0], args[2])
 			return
 		}
 	}
-
-	for i, s := range arguments[2] {
-		if (s >= '0' && s <= '9') || (i == 0 && s == '-') {
-			continue
-		} else {
-			fmt.Print("0\n")
-			return
-		}
-	}
-
-	firstNbr := Atoi(arguments[0])
-	secondNbr := Atoi(arguments[2])
-
-	if secondNbr == 0 && arguments[1] == "/" {
-		fmt.Println("No division by 0")
-		return
-	}
-	if secondNbr == 0 && arguments[1] == "%" {
-		fmt.Println("No Modulo by 0")
-		return
-	}
-
-	result := 0
-	arrayOfFunctions := []func(int, int) int{plus, minus, times, div, mod}
-	result = apply(arrayOfFunctions[sign], firstNbr, secondNbr)
-
-	fmt.Println(result)
-}
-
-func plus(a, b int) int {
-	return a + b
-}
-
-func minus(a, b int) int {
-	return a - b
-}
-
-func times(a, b int) int {
-	return a * b
-}
-
-func div(a, b int) int {
-	return a / b
-}
-
-func mod(a, b int) int {
-	return a % b
-}
-
-func apply(f func(int, int) int, a int, b int) int {
-	return f(a, b)
-}
-
-func Atoi(s string) int {
-	runes := []rune(s)
-	LenRune := 0
-	result := 0
-	for i := range runes {
-		LenRune = i + 1
-	}
-	if LenRune == 0 {
-		return 0
-	}
-
-	tens := 1
-	for k := 0; k < LenRune-1; k++ {
-		if runes[k] == '+' || runes[k] == '-' {
-			continue
-		}
-		tens *= 10
-	}
-
-	for i := range runes {
-		if (runes[0] == '-' || runes[0] == '+') && i == 0 {
-			continue
-		}
-		if runes[i] < '0' || runes[i] > '9' {
-			return 0
-		}
-		numb := 0
-		for j := '0'; j < runes[i]; j++ {
-			numb++
-		}
-		result += numb * tens
-		tens /= 10
-	}
-	if runes[0] == '-' {
-		result *= -1
-	}
-	return result
+	PrintConsole("0")
 }
