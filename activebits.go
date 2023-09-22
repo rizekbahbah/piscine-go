@@ -6,4 +6,3 @@ func ActiveBits(n int) uint {
 	}
 	return (uint(n) % 2) + ActiveBits(n/2)
 }
-xzc§zc
