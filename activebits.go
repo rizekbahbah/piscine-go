@@ -1,19 +1,10 @@
 package piscine
 
 func ActiveBits(n int) uint {
-	count := 0
-	if n < 0 {
-		n = -n
+	compte := 0
+	for n > 0 {
+		compte += n & 1
+		n >>= 1
 	}
-	re := 0
-	div := 0
-	DivMod(n, 2, &div, &re)
-	for div > 0 {
-		DivMod(n, 2, &div, &re)
-		n = div
-		if re == 1 {
-			count++
-		}
-	}
-	return uint(count)
+	return uint(compte)
 }
