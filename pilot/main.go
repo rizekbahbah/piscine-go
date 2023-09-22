@@ -1,12 +1,8 @@
-package main
+package piscine
 
-func main() {
-	type Pilot struct {
-		Name     string
-		Life     float32
-		Age      int
-		Aircraft int
-	}
-
-	const AIRCRAFT1 = 1
+type Pilot struct {
+	Name     string
+	Life     float32
+	Age      int
+	Aircraft int
 }
