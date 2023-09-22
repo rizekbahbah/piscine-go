@@ -1,4 +1,4 @@
-package solutions
+package piscine
 
 func ShoppingListSort(slice []string) []string {
 	for i := 0; i < len(slice)-1; i++ {
