@@ -1,10 +1,10 @@
 package piscine
 
 func ActiveBits(n int) uint {
-	if 1 <= n && n < 2 {
-		return uint(n)
+	compte := 1
+	for n > 0 {
+		compte += n & 1
+		n >>= 1
 	}
-	return (uint(n) % 2) + ActiveBits(n/2)
+	return uint(compte)
 }
-
-///////
