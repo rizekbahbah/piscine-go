@@ -10,7 +10,16 @@ type List struct {
 	Tail *NodeL
 }
 
-func IsPositive_node(node *NodeL) bool {
+func IsPositiveNode(node *NodeL) bool {
+	switch node.Data.(type) {
+	case int, float32, float64, byte:
+		return node.Data.(int) > 0
+	default:
+		return false
+	}
+}
+
+func IsNegative_node(node *NodeL) bool {
 	switch node.Data.(type) {
 	case int, float32, float64, byte:
 		return node.Data.(int) > 0
@@ -20,32 +29,31 @@ func IsPositive_node(node *NodeL) bool {
 	return false
 }
 
-func IsNegative_node(node *NodeL) bool {
+func IsNumeric_node(node *NodeL) bool {
 	switch node.Data.(type) {
 	case int, float32, float64, byte:
-		return node.Data.(int) < 0
+		return true
 	case string, rune:
 		return false
 	}
 	return false
 }
 
-func IsNotNumeric_node(node *NodeL) bool {
+func IsAlNode(node *NodeL) bool {
 	switch node.Data.(type) {
 	case int, float32, float64, byte:
 		return false
-	case string, rune:
+	default:
 		return true
 	}
-	return true
 }
 
-func ListForEachIf(l *List, f func(*NodeL), cond func(*NodeL) bool) {
-	element := l.Head
-	for element != nil {
-		if cond(element) {
-			f(element)
+func ListForEachIf(l *List, f func(*NodeL), comp func(*NodeL) bool) {
+	it := l.Head
+	for it != nil {
+		if comp(it) {
+			f(it)
 		}
-		element = element.Next
+		it = it.Next
 	}
 }
